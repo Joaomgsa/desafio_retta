@@ -46,7 +46,7 @@ class ConvertToRoman():
         ]
         roman_num = ''
         i = 0
-        num = self.num
+        num = int(self.num)
         while num > 0:
             for _ in range(num // val[i]):
                 roman_num += syb[i]
@@ -56,10 +56,11 @@ class ConvertToRoman():
     
     def handle(self):
        try: 
-            converter = ConvertToRoman()
-            if self.option == '1':
+            converter = ConvertToRoman(num=self.num, option=self.option)
+            print(self.option)
+            if self.option == "Arábicos - Romanos":
                 return converter.int_to_roman()
-            elif self.option == '2':
+            elif self.option == "Romanos - Arábicos":
                 return converter.roman_to_int()
             else:
                 return "Opcao Inválida"
@@ -68,3 +69,4 @@ class ConvertToRoman():
     
     if __name__ == '__main__':
         ...
+    
