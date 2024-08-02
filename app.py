@@ -16,7 +16,8 @@ def converter():
         selected_option=request.form.get("opcoes")
         number= request.form.get("number")
         
-        result = ConvertToRoman(selected_option, number)
+        converter = ConvertToRoman(number, selected_option)
+        result = converter.handle()
         return render_template('result.html', result = result)
     
     except Exception as e:

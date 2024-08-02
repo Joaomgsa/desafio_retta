@@ -4,7 +4,7 @@ class ConvertToRoman():
         self.num = num
         self.option = option
     
-    def roman_to_int(num):
+    def roman_to_int(self):
         # Mapeamento de numerais romanos para inteiros
         roman_to_int_map = {
             'I': 1, 'V': 5, 'X': 10, 'L': 50,
@@ -16,7 +16,7 @@ class ConvertToRoman():
         prev_value = 0
         
         # Iterar sobre cada caractere do numeral romano, da direita para a esquerda
-        for char in reversed(s):
+        for char in reversed(self.num):
             value = roman_to_int_map[char]
             
             # Se o valor atual é menor que o valor anterior, subtrair do total
@@ -30,7 +30,7 @@ class ConvertToRoman():
         
         return total    
     
-    def int_to_roman(num):
+    def int_to_roman(self):
         # Mapeamento de inteiros para numerais romanos
         val = [
             1000, 900, 500, 400,
@@ -46,6 +46,7 @@ class ConvertToRoman():
         ]
         roman_num = ''
         i = 0
+        num = self.num
         while num > 0:
             for _ in range(num // val[i]):
                 roman_num += syb[i]
@@ -53,12 +54,12 @@ class ConvertToRoman():
             i += 1
         return roman_num
     
-    def handle(num, option):
+    def handle(self):
        try: 
-            converter = ConvertToRoman(num, option)
-            if option == '1':
+            converter = ConvertToRoman()
+            if self.option == '1':
                 return converter.int_to_roman()
-            elif option == '2':
+            elif self.option == '2':
                 return converter.roman_to_int()
             else:
                 return "Opcao Inválida"
