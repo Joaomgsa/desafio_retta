@@ -57,7 +57,6 @@ class ConvertToRoman():
     def handle(self):
        try: 
             converter = ConvertToRoman(num=self.num, option=self.option)
-            print(self.option)
             if self.option == "Arábicos - Romanos":
                 return converter.int_to_roman()
             elif self.option == "Romanos - Arábicos":

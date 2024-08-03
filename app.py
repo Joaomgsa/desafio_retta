@@ -1,10 +1,17 @@
+import os 
+import requests
+
 from flask import Flask, render_template, request, redirect, url_for, flash
 
 from services.ConvertToRoman import ConvertToRoman
+from dotenv import load_dotenv
+
+
+load_dotenv()
 
 app = Flask(__name__)
 
-
+app.secret_key = os.getenv('SECRET_KEY')  
 
 @app.route('/')
 def index():
@@ -43,6 +50,17 @@ def converter():
     except Exception as e:
         return str(e)
 
+
+def medals():
+    api_url = os.getenv('API_BASE_URL')
+    response = requests.get(api_url)
+    
+    if response.status_code == 200:
+        data = response.json()
+    if response.status_code >= 300:
+        return None
+    
+    return render_template('olympics.html')
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0', debug=True, port=7000)
