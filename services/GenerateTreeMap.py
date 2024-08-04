@@ -4,40 +4,40 @@ import plotly.express as px
 import pandas as pd
 
 
-class GenerateTreeMap():
+class GenerateTreeMap:
+    """
+    Classe para gerar um treemap a partir de dados de medalhas.
+    """
 
     def __init__(self):
         pass
-    
-    def medals():
+
+    def medals(self) -> dict:
+        """
+        Obtém os dados de medalhas a partir de uma API.
+
+        Returns:
+            dict: Dados de medalhas em formato de dicionário.
+            None: Se a resposta da API não for bem-sucedida.
+        """
         try:
             api_url = os.getenv('API_BASE_URL')
+            if not api_url:
+                raise ValueError("API_BASE_URL não está definida nas variáveis de ambiente.")
+            
             response = requests.get(api_url)
-            
-            if response.status_code == 200:
-                data = response.json()
-            if response.status_code >= 300:
-                return None
-            
-            return data
-        
-        except Exception as e:
-            return str(e)
-    
-    def handle(self):
-        
-        medals = GenerateTreeMap.medals()
-        
-        if medals is None:
-            return "Erro ao acessar a API"
-        
-        df = pd.DataFrame(medals.data)
-        
-        fig = px.treemap(df, 
-                         path=['country', 'name'],
-                         values='total_medals',
-                         color='total_medals',
-                         hover_data=['gold_medals','silver_medals','bronze_medals'],
-                         title='Medalhas por País')
+            response.raise_for_status()  # Levanta um erro para códigos de status 4xx/5xx
 
-        return fig.show()        
+            data = response.json()
+            print(data)
+            return data
+
+        except requests.exceptions.RequestException as e:
+            print(f"Erro ao acessar a API: {e}")
+            return None
+        except ValueError as e:
+            print(f"Erro de configuração: {e}")
+            return None
+        except Exception as e:
+            print(f"Erro inesperado: {e}")
+            return None

@@ -1,9 +1,11 @@
 import os 
-import requests
+import plotly.express as px
+import pandas as pd
 
-from flask import Flask, render_template, request, redirect, url_for, flash
+from flask import Flask, render_template,render_template_string, request, redirect, url_for, flash
 
 from services.ConvertToRoman import ConvertToRoman
+from services.GenerateTreeMap import GenerateTreeMap
 from dotenv import load_dotenv
 
 
@@ -50,17 +52,13 @@ def converter():
     except Exception as e:
         return str(e)
 
-
-def medals():
-    api_url = os.getenv('API_BASE_URL')
-    response = requests.get(api_url)
-    
-    if response.status_code == 200:
-        data = response.json()
-    if response.status_code >= 300:
-        return None
-    
-    return render_template('olympics.html')
+@app.route('/treemap', methods=['GET'])
+def treemap():
+    try:
+        graph_html = GenerateTreeMap().handle()
+        return render_template('treemap.html', graph_html=graph_html)
+    except Exception as e:
+        return f"Erro: {str(e)}", 500
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0', debug=True, port=7000)
