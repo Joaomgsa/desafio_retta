@@ -16,7 +16,6 @@ class GenerateTreeMap():
             
             if response.status_code == 200:
                 data = response.json()
-                print(data)
             if response.status_code >= 300:
                 return None
             
@@ -28,18 +27,19 @@ class GenerateTreeMap():
     def handle(self):
         
         medals = GenerateTreeMap.medals()
-        
-        print(type(medals['data']))
-        
+                
         if medals is None:
             return "Erro ao acessar a API"
         
         df = pd.DataFrame(medals['data'])
         
+        
+        
         fig = px.treemap(df, 
                          path=['id', 'total_medals'],
                          values='total_medals',
                          color='total_medals',
+                         color_continuous_scale='RdBu',
                          hover_data=['gold_medals','silver_medals','bronze_medals'],
                          title='Quadro de Medalhas - Paris 2024')
         fig.update_layout(margin=dict(t=50, l=25, r=25), title_x=0.5)
