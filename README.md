@@ -26,18 +26,18 @@ Este projeto é uma aplicação Flask que [descreva brevemente a funcionalidade 
 #### Por padrão, a aplicação estará acessível em http://127.0.0.1:5000/
 
 
-Estrutura do projeto
-app: Contém o código principal da aplicação Flask.
-templates: Contém os templates HTML.
-static: Contém arquivos estáticos (CSS, JavaScript, imagens).
-requirements.txt: Lista as dependências do projeto.
-Contribuindo
-Se você quiser contribuir para este projeto, siga estes passos:
+## Estrutura do projeto:
+- app: Contém o código principal da aplicação Flask.
+- templates: Contém os templates HTML.
+- static: Contém arquivos estáticos (CSS, JavaScript, imagens).
+- requirements.txt: Lista as dependências do projeto.
 
-Fork este repositório.
-Crie um novo branch para sua feature.
-Faça suas alterações e commit.
-Envie um pull request.
+## Contribuindo
+   Se você quiser contribuir para este projeto, siga estes passos:
+ - Fork este repositório.
+ - Crie um novo branch para sua feature.
+ - Faça suas alterações e commit.
+ - Envie um pull request.
 
 
   
